@@ -1,0 +1,98 @@
+LGPO 使用方法
+
+請注意CMD輸入的路徑全部必須為完整路徑，並且資料夾必須存在，
+Powershell 可以使用相對路徑。
+
+將原始群取原則匯出：
+LGPO /b "完整路徑" /n "Backup"
+
+解析群組原則 -> lgpo.txt
+LGPO /parse /m "匯出路徑\{GUID}\DomainSyscol\GPO\Machine\registry.pol" >> lgpo.txt
+LGPO /parse /m "匯出路徑\{GUID}\DomainSyscol\GPO\User\registry.pol" >> lgpo.txt
+
+將匯出的 lgpo.txt 修改後，編譯為pol文件：
+LGPO /r "路徑\lgpo.txt" /w "路徑\registry.pol"
+
+將導出的 pol 文件匯入 windows 群組管理原則：
+
+電腦設定：
+    LGPO /m registry.pol
+使用者設定：
+    LGPO /u registry.pol
+
+LGPO /r "file.txt" /w "file.pol"
+LGPO /m LGPO_Golbal.pol
+LGPO /u LGPO_Golbal.pol
+
+======================================================================================
+
+LGPO.exe - Local Group Policy Object Utility
+Version 3.0.2004.13001
+Copyright (C) 2015-2020 Microsoft Corporation
+Security Compliance Toolkit - https://www.microsoft.com/download/details.aspx?id=55319
+
+LGPO.exe has four modes:
+  * Import and apply policy settings;
+  * Export local policy to a GPO backup;
+  * Parse a registry.pol file to "LGPO text" format;
+  * Build a registry.pol file from "LGPO text".
+
+To apply policy settings:
+
+    LGPO.exe command [...]
+
+    where "command" is one or more of the following (each of which can be repeated):
+
+    /g path                   import settings from one or more GPO backups under "path"
+    /p path\lgpo.PolicyRules  import settings from a Policy Analyzer .PolicyRules file
+    /m path\registry.pol      import settings from registry.pol into machine config
+    /u path\registry.pol      import settings from registry.pol into user config
+    /ua path\registry.pol     import settings from registry.pol into user config for Administrators
+    /un path\registry.pol     import settings from registry.pol into user config for Non-Administrators
+    /u:username path\registry.pol
+                              import settings from registry.pol into user config for local user
+                              specified by "username"
+    /s path\GptTmpl.inf       apply security template
+    /a[c] path\Audit.csv      apply advanced auditing settings; /ac to clear policy first
+    /t path\lgpo.txt          apply registry commands from LGPO text
+    /e <name>|<guid>          enable GP extension for local policy processing; specify a
+                              GUID, or one of these names:
+                              * "zone" for IE zone mapping extension
+                              * "mitigation" for mitigation options, including font blocking
+                              * "audit" for advanced audit policy configuration
+                              * "LAPS" for Local Administrator Password Solution
+                              * "DGVBS" for Device Guard virtualization-based security
+                              * "DGCI" for Device Guard code integrity policy
+    /ef path\backup.xml       enable GP extensions referenced in backup.xml from a GPO backup
+    /boot                     reboot after applying policies
+    /v                        verbose output
+    /q                        quiet output (no headers)
+
+To create a GPO backup from local policy:
+
+    LGPO.exe /b path [/n GPO-name]
+
+    /b path               Create GPO backup in "path"
+    /n GPO-name           Optional GPO display name (use quotes if it contains spaces)
+
+To parse a Registry.pol file to LGPO text (stdout):
+
+    LGPO.exe /parse [/q] {/m|/u|/ua|/un|/u:username} path\registry.pol
+
+    /m path\registry.pol   parse registry.pol as machine config commands
+    /u path\registry.pol   parse registry.pol as user config commands
+    /ua path\registry.pol  parse registry.pol as user config for Administrators
+    /un path\registry.pol  parse registry.pol as user config for Non-Administrators
+    /u:username path\registry.pol
+                           parse registry.pol as user config for local user
+                           specified by "username"
+    /q                     quiet output (no headers)
+
+To build a Registry.pol file from LGPO text:
+
+    LGPO.exe /r path\lgpo.txt /w path\registry.pol [/v]
+
+    /r path\lgpo.txt      Read input from LGPO text file
+    /w path\registry.pol  Write new registry.pol file
+
+(See the documentation for more information and examples.)
