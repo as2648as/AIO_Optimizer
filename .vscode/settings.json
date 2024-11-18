@@ -16,5 +16,5 @@
         "files.encoding": "utf8bom",
         "files.autoGuessEncoding": true
     },
-    "files.trimTrailingWhitespace": true
+    // "files.trimTrailingWhitespace": true
 }
