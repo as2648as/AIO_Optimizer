@@ -1,4 +1,4 @@
-﻿# ===== Getting Adminitrator =====
+﻿<# ===== Getting Administrator ===== #>
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 
@@ -20,24 +20,24 @@ if (-not $isAdmin) {
 Set-Location "$PSScriptRoot"
 Write-Host ""
 
-# ===== Script Run =====
+<# ===== Script Run ===== #>
 
 @(
-    <# --------------------------------
-        # 註解為停用腳本, 取消註解可啟用腳本
-        # 注意腳本順序盡量不要隨意更動
-    ---------------------------------- #>
+    <# -------------------------------------- #>
+    <#   註解為停用腳本, 取消註解可啟用腳本   #>
+    <#      注意腳本順序盡量不要隨意更動      #>
+    <# -------------------------------------- #>
 
-    "add-en-US-keybroad-language"     # 新增鍵盤語言(en-US)
-    "disable-services"                # 關閉服務
+    "add-en-US-keybroad-language"     # 新增鍵盤語言   (only en-US)
+    "disable-services"                # 關閉無用服務
     "lgpo-setting"                    # LGPO 設定
+    "remove-applications"             # 移除無用軟體
     "remove-right-click-menu-options" # 右鍵雜項移除
     "auto-install-soft"               # 自動安裝軟體
+    "remove-one-drive"                # 移除 One Drive
+    "personal-setting"                # 個人化設定     (大部分功能 Optimizer 已有)
+    "power-options"                   # 設置電源選項   (主要為螢幕關閉及休眠時間設定)
 
-    # "remove-onedrive"                 # 移除 OneDrive
-    # "ethernet-interface-setting"      # 網路介面設定
-    # "power-options"                   # 電源選項設定
-    # "personal-setting"                # 個人化設置
 ) | ForEach-Object {
     .("$PSScriptRoot\script\$_.ps1")  # run script
 }

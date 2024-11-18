@@ -1,13 +1,20 @@
 {
     "cSpell.words": [
         "AppCompat",
-        "Cortana",
-        "DWORD",
-        "LGPO",
-        "Uprograms"
+        "Clipchamp",
+        "ionuttbara",
+        "Israelsson",
+        "myinvocation",
+        "NGSC",
+        "NTUSER",
+        "TCUI",
+        "Uprograms",
+        "Webp",
+        "Zune"
     ],
     "[powershell]": {
         "files.encoding": "utf8bom",
         "files.autoGuessEncoding": true
-    }
+    },
+    "files.trimTrailingWhitespace": true
 }

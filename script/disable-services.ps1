@@ -2,7 +2,7 @@
 # script-name: disable-services
 # last-update: 2024-11-17
 
-Write-Host "===== 關閉服務 =====`n"
+Write-Host "===== 關閉無用服務 =====`n"
 
 @(
     # 關閉蒐集資訊
@@ -14,7 +14,6 @@ Write-Host "===== 關閉服務 =====`n"
     # 用不到的東西
     "BDESVC"              # BitLocker Drive Encryption Service
     "MapsBroker"          # 下載地圖管理 - Download Maps Manager
-    "Fax"                 # 傳真服務 - Fax
     "WpcMonSvc"           # 家長監護
     "RetailDemo"          # 零售示範服務
 
@@ -29,12 +28,13 @@ Write-Host "===== 關閉服務 =====`n"
     # "WSearch"             # Windows搜尋 - Windows Search
     # "iphlpsvc"            # IPv6轉換 - IP Helper
     # "PhoneSvc"            # 管理手機狀態 - Phone Service
+
+    # Windows 11 已經不存在的項目
+    # "Fax"                 # 傳真服務 - Fax
 ) | ForEach-Object {
-    Write-Host -noNewLine "$_..."
-    Get-Service -Name "$_"
-    Stop-Service -Name "$_" -Force
-    Set-Service -Name "$_" -StartupType Disabled
-    Write-Host "OK"
+    Get-Service -Name "$_" -ErrorAction SilentlyContinue
+    Stop-Service -Name "$_" -Force -ErrorAction SilentlyContinue
+    Set-Service -Name "$_" -StartupType Disabled -ErrorAction SilentlyContinue
 }
 
-Write-Host "`n關閉服務完成`n"
+Write-Host "`n關閉無用服務完成`n"
