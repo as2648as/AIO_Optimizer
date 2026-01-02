@@ -1,50 +1,113 @@
-﻿<# ===== Getting Administrator ===== #>
+﻿using module ".\Modules\RegistryTools.psm1"
 
-$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+<# ===== Getting Administrator ===== #>
 
-if (-not $isAdmin) {
-    Write-Host "`n"
-    Write-Host "若腳本執行在時直接退出，"
-    Write-Host "本請使用系統管理員開啟 Powershell`n並輸入："
-    Write-Host "`"Set-ExecutionPolicy Unrestricted -Force`""
-    Write-Host "指令再執行此腳本。`n"
+$IsAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 
-    Write-Host "按下任意按鍵繼續..."
+if (-not $IsAdmin) {
+    $Message = @"
+
+===== 注意 =====
+
+目前 PowerShell 執行原則為：$ExecutionPolicy
+此腳本需要將執行原則設為 Unrestricted 才能正常運作。
+
+請以【系統管理員】權限執行下列指令：
+--------------------------------------------------
+Set-ExecutionPolicy Unrestricted -Force
+--------------------------------------------------
+
+完成後，請重新執行此腳本。
+
+按下任意鍵繼續
+
+"@
+
+    Write-Host $Message -ForegroundColor Yellow
 
     $null = $Host.UI.RawUI.ReadKey('NoEcho, IncludeKeyDown')
 
-    Start-Process powershell -verb runAs -ArgumentList ('-File', "$($myinvocation.MyCommand.Definition)")
+    Start-Process powershell -Verb RunAs -ArgumentList "-File `"$PSCommandPath`""
+
     Exit
 }
 
 Set-Location "$PSScriptRoot"
-Write-Host ""
 
 <# ===== Script Run ===== #>
 
-@(
-    <# -------------------------------------- #>
-    <#   註解為停用腳本, 取消註解可啟用腳本   #>
-    <#      注意腳本順序盡量不要隨意更動      #>
-    <# -------------------------------------- #>
+$scripts = @(
+    <# 鍵盤滑鼠設定 #>
+    "AddEnglishLanguage"                   # 增加鍵盤語言 (en-US)
+    "DisableIdiotKeyboardSetting"          # 關閉 Windows 惱人的鍵盤設定（相黏鍵、篩選鍵、切換鍵）
+    # "DisableLeftShiftChangeInputMode"      # 停用 「左 Shift 切換輸入法」
+    "DisableMouseEnhancePointerPrecision"  # 取消 「增強鼠標的準確性」
+    "EnableNumLockOnLogin"                 # 登入時啟用 NumLock
+    "SetZhuInDefaultInputMode"             # 預設中文輸入模式為「英數模式」
 
-    "add-en-US-keybroad-language"     # 新增鍵盤語言   (only en-US)
-    "disable-services"                # 關閉無用服務
-    "lgpo-setting"                    # LGPO 設定
-    "remove-applications"             # 移除無用軟體
-    "remove-right-click-menu-options" # 右鍵雜項移除
-    "auto-install-soft"               # 自動安裝軟體
-    "remove-one-drive"                # 移除 One Drive
-    "personal-setting"                # 個人化設定     (大部分功能 Optimizer 已有)
-    "power-options"                   # 設置電源選項   (主要為螢幕關閉及休眠時間設定)
+    <# 個人化設定 #>
+    "DisableUACConsentPromptBehaviorAdmin" # 關閉 UAC 管理員同意提示
+    "DisableSecurityNotify"                # 關閉安全性警告通知
+    "EnableDarkMode"                       # 啟用深色模式
+    "ExplorerBasicSetting"                 # 檔案總管基本設定
+    "SetClassicRightClickMenu"             # 將右鍵還原為舊版樣式
+    "SetStartMenuAtLeft"                   # 將開始功能表設為左側
+    "SnapBasicSetting"                     # 停用 [貼齊視窗] 的所有子項目
+    "TaskbarWindowMonitor"                 # 將 「使用多個顯示器時，在以下位置顯示我的工作列應用程式」 設定為 「視窗開啟所在工作列」
+    "TurnOffTaskbarCrapRemind"             # 關閉小工具提醒
+    "WallpaperRemind"                      # 設定桌布提醒
+    "SetUserFolder"                        # 設定使用者資料夾
+)
 
-) | ForEach-Object {
-    .("$PSScriptRoot\script\$_.ps1")  # run script
+$scripts | ForEach-Object {
+    if (-not (Test-Path ".\Scripts\$_.ps1")) {
+        throw "找不到腳本檔案：Scripts\$_.ps1"
+    }
 }
 
-# ===== End script =====
+Write-Host @"
 
-Write-Host "`n===== 設定完成 =====`n";
-Write-Host "按下任意鍵退出";
+======================================
+            開始執行腳本
+======================================
+
+"@ -ForegroundColor Cyan
+
+$registryEditor = [RegistryEditor]::new()
+
+$scriptCount = $scripts.Count
+$paddingWidth = $scriptCount.ToString().Length
+
+for ($i = 0; $i -lt $scripts.Count; $i++) {
+    $script = $scripts[$i]
+    $currentIndex = ($i + 1).ToString("D$paddingWidth")
+
+    Write-Host "[$currentIndex/$scriptCount] $script - " -NoNewline
+
+    $ErrorMessage = & (".\Scripts\$script.ps1") -RegisterEditor $registryEditor
+
+    if ($null -eq $ErrorMessage) {
+        Write-Host "[OK]" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[$ErrorMessage]" -ForegroundColor Red
+    }
+}
+
+Write-Host "`n[RegistryEditor] 正在套用登錄檔變更，請稍候... - " -NoNewline
+
+$registryEditor.Apply()
+
+Write-Host "OK" -ForegroundColor Green
+
+Write-Host @"
+
+======================================
+            所有項目完成！
+======================================
+
+"@ -ForegroundColor Cyan
+
+Write-Host "按下任意鍵退出`n"
 
 $null = $Host.UI.RawUI.ReadKey('NoEcho, IncludeKeyDown');

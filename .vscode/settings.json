@@ -2,6 +2,8 @@
     "cSpell.words": [
         "AppCompat",
         "Clipchamp",
+        "IMETC",
+        "Inproc",
         "ionuttbara",
         "Israelsson",
         "myinvocation",
@@ -16,5 +18,5 @@
         "files.encoding": "utf8bom",
         "files.autoGuessEncoding": true
     },
-    // "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true
 }
