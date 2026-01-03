@@ -1,7 +1,9 @@
 # ZiLin 的超懶人系統自動優化腳本 (ﾟ ∀。)
 
 個人使用的 Windows 11 優化腳本，搭配 [CrapFixer](https://github.com/builtbybel/CrapFixer) 服用可達最佳效果。
-不保障系統更新後可能產生的問題，使用前請自行風險評估。
+
+> [!WARNING]
+> 僅使用 Windows 11 25H2 測試，不保障系統更新後可能產生的問題，使用前請自行風險評估。
 
 ## 使用方式
 
