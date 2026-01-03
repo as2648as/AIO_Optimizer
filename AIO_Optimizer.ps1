@@ -38,27 +38,27 @@ Set-Location "$PSScriptRoot"
 
 $scripts = @(
     <# 鍵盤滑鼠設定 #>
-    "AddEnglishLanguage"                   # 增加鍵盤語言 (en-US)
-    "DisableIdiotKeyboardSetting"          # 關閉 Windows 惱人的鍵盤設定（相黏鍵、篩選鍵、切換鍵）
-    # "DisableLeftShiftChangeInputMode"      # 停用 「左 Shift 切換輸入法」
-    "DisableMouseEnhancePointerPrecision"  # 取消 「增強鼠標的準確性」
-    "EnableNumLockOnLogin"                 # 登入時啟用 NumLock
-    "SetZhuInDefaultInputMode"             # 預設中文輸入模式為「英數模式」
+    # "AddEnglishLanguage"                   # 增加鍵盤語言 (en-US)
+    # "DisableIdiotKeyboardSetting"          # 關閉 Windows 惱人的鍵盤設定（相黏鍵、篩選鍵、切換鍵）
+    # # "DisableLeftShiftChangeInputMode"      # 停用 「左 Shift 切換輸入法」
+    # "DisableMouseEnhancePointerPrecision"  # 取消 「增強鼠標的準確性」
+    # "EnableNumLockOnLogin"                 # 登入時啟用 NumLock
+    # "SetZhuInDefaultInputMode"             # 預設中文輸入模式為「英數模式」
 
     <# 個人化設定 #>
-    "DisableUACConsentPromptBehaviorAdmin" # 關閉 UAC 管理員同意提示
-    "DisableSecurityNotify"                # 關閉安全性警告通知
-    "EnableDarkMode"                       # 啟用深色模式
-    "ExplorerBasicSetting"                 # 檔案總管基本設定
+    # "DisableUACConsentPromptBehaviorAdmin" # 關閉 UAC 管理員同意提示
+    # "DisableSecurityNotify"                # 關閉安全性警告通知
+    # "EnableDarkMode"                       # 啟用深色模式
+    # "ExplorerBasicSetting"                 # 檔案總管基本設定
     "SetClassicRightClickMenu"             # 將右鍵還原為舊版樣式
-    "SetStartMenuAtLeft"                   # 將開始功能表設為左側
-    "SnapBasicSetting"                     # 停用 [貼齊視窗] 的所有子項目
-    "TaskbarWindowMonitor"                 # 將 「使用多個顯示器時，在以下位置顯示我的工作列應用程式」 設定為 「視窗開啟所在工作列」
-    "TurnOffTaskbarCrapRemind"             # 關閉小工具提醒
-    "WallpaperRemind"                      # 設定桌布提醒
-    "ApplyLGPO"                            # 套用 LGPO 設定
-    "SetUserFolder"                        # 設定使用者資料夾
-    "SetWinToolsPath"                      # 將 WinTools 加入環境變數 PATH
+    # "SetStartMenuAtLeft"                   # 將開始功能表設為左側
+    # "SnapBasicSetting"                     # 停用 [貼齊視窗] 的所有子項目
+    # "TaskbarWindowMonitor"                 # 將 「使用多個顯示器時，在以下位置顯示我的工作列應用程式」 設定為 「視窗開啟所在工作列」
+    # "TurnOffTaskbarCrapRemind"             # 關閉小工具提醒
+    # "WallpaperRemind"                      # 設定桌布提醒
+    # "ApplyLGPO"                            # 套用 LGPO 設定
+    # "SetUserFolder"                        # 設定使用者資料夾
+    # "SetWinToolsPath"                      # 將 WinTools 加入環境變數 PATH
 )
 
 $scripts | ForEach-Object {

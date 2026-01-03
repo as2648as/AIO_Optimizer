@@ -37,22 +37,38 @@ try {
         [RegistrySetting]::new(
             "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked",
             @{
-                "{f81e9010-6ea4-11ce-a7ff-00aa003ca9f6}" = "Sharing - 共用"
+                "{e2bf9676-5f8f-435c-97eb-11607a5bedf7}" = "Share - 共用"
             },
             $true
         )
     )
 
     # 移除 [傳送至]
-    $registryEditor.AddSetting(
-        [RegistrySetting]::new(
-            "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked",
-            @{
-                "{7BA4C740-9E81-11CF-99D3-00AA004AE837}" = "SendTo - 傳送至"
-            },
-            $true
-        )
+    # 1. 移除 AllFilesystemObjects 下的 SendTo
+    # 2. 移除 UserLibraryFolder 下的 SendTo
+    $SendToPath = @(
+        "Registry::HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo"
+        "Registry::HKEY_CLASSES_ROOT\UserLibraryFolder\shellex\ContextMenuHandlers\SendTo"
     )
+
+    foreach ($path in $SendToPath) {
+        if (Test-Path $path) {
+            Remove-Item -Path $path -Force
+        }
+    }
+
+    # 還原 [傳送至]
+    # foreach ($path in $SendToPath) {
+    #     $registryEditor.AddSetting(
+    #         [RegistrySetting]::new(
+    #             $path,
+    #             @{
+    #                 "" = "{7BA4C740-9E81-11CF-99D3-00AA004AE837}"
+    #             },
+    #             $true
+    #         )
+    #     )
+    # }
 
     # 移除 [列印]
     @(
