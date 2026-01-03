@@ -58,6 +58,7 @@ $scripts = @(
     "WallpaperRemind"                      # 設定桌布提醒
     "ApplyLGPO"                            # 套用 LGPO 設定
     "SetUserFolder"                        # 設定使用者資料夾
+    "SetWinToolsPath"                      # 將 WinTools 加入環境變數 PATH
 )
 
 $scripts | ForEach-Object {
