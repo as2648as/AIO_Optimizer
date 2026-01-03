@@ -1,0 +1,183 @@
+; [GPO] 隱藏所有 Windows 安全性通知
+; 路徑：電腦設定 > 系統管理範本 > Windows 元件 > Windows 安全性 > 通知
+; 原則：隱藏所有通知 (DisableNotifications)
+Computer
+SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications
+DisableNotifications
+DWORD:1
+
+; [GPO] 關閉 UAC 提示
+; 路徑：電腦設定 > Windows 設定 > 安全性設定 > 本機原則 > 安全性選項
+; 原則：使用者帳戶控制: 在管理員核准模式，系統管理員之提升權限提示的行為 (ConsentPromptBehaviorAdmin)
+Computer
+SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+ConsentPromptBehaviorAdmin
+DWORD:0
+
+; [GPO] 關閉不安全檔案的安全性警告
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Internet Explorer > 網際網路控制台 > 安全性畫面 > 網際網路區域
+; 原則: 顯示可能不安全檔案的安全性警告 (1806)
+Computer
+Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3
+1806
+DWORD:0
+
+; [GPO] 關閉 Windows Defender 防毒軟體
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Microsoft Defender 防毒軟體
+; 原則: 關閉 Windows Defender 防毒軟體 (DisableAntiSpyware)
+Computer
+Software\Policies\Microsoft\Windows Defender
+DisableAntiSpyware
+DWORD:1
+
+; [GPO] 啟用「關閉即時保護」
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Microsoft Defender 防毒軟體 > 即時保護
+; 原則: 關閉即時保護 (DisableRealtimeMonitoring)
+Computer
+Software\Policies\Microsoft\Windows Defender\Real-Time Protection
+DisableRealtimeMonitoring
+DWORD:1
+
+; [GPO] 停用 Windows Update 自動更新
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Windows Update > 管理使用者體驗
+; 原則: 設定自動更新 (NoAutoUpdate)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+NoAutoUpdate
+DWORD:1
+
+; [GPO] 啟用「不包含Windows更新的驅動程式」
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Windows Update > 管理Windows Update提供的更新
+; 原則: 不包含Windows更新的驅動程式 (ExcludeWUDriversInQualityUpdate)
+Computer
+Software\Policies\Microsoft\Windows\WindowsUpdate
+ExcludeWUDriversInQualityUpdate
+DWORD:1
+
+; [GPO] 不顯示「安裝更新並關機」
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Windows Update > 舊版規則
+; 規則: 不要在 [關閉 Windows] 對話方塊中顯示 [安裝更新並關機] 選項 (NoAUShutdownOption)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+NoAUShutdownOption
+DWORD:1
+
+; [GPO] 不強制使用「安裝更新並關機」
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Windows Update > 舊版規則
+; 原則: 不要將 [關閉 Windows] 對話方塊中的預設選項調整為 [安裝更新並關機] (NoAUAsDefaultShutdownOption)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+NoAUAsDefaultShutdownOption
+DWORD:1
+
+; [GPO] 不自動重開機更新
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > Windows Update > 舊版規則
+; 原則: 有使用者登入時不自動重新開機以完成排定的自動更新安裝 (NoAutoRebootWithLoggedOnUsers)
+Computer
+Software\Policies\Microsoft\Windows\WindowsUpdate\AU
+NoAutoRebootWithLoggedOnUsers
+DWORD:1
+
+; [GPO] 關閉傳遞最佳化
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > 傳遞最佳化
+; 原則: 下載模式 (DODownloadMode)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization
+DODownloadMode
+DWORD:99
+
+; [GPO] 關閉 MS Store 自動下載及更新
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > 市集
+; 原則: 關閉自動下載和安裝更新 (AutoDownload)
+Computer
+SOFTWARE\Policies\Microsoft\WindowsStore
+AutoDownload
+DWORD:2
+
+; [GPO] 關閉程式相容性助理
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > 應用程式相容性
+; 原則: [GPO] 關閉程式相容性助理 (DisablePCA)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\AppCompat
+DisablePCA
+DWORD:1
+
+; [GPO] 關閉應用程式遙測
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > 應用程式相容性
+; 原則: [GPO] 關閉應用程式遙測 (AITEnable)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\AppCompat
+AITEnable
+DWORD:0
+
+; [GPO] 停用「設定Windows Defender SmartScreen」
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > 檔案總管
+; 原則: 設定Windows Defender SmartScreen (EnableSmartScreen)
+Computer
+Software\Policies\Microsoft\Windows\System
+EnableSmartScreen
+DWORD:0
+
+; [GPO] 關閉「自動播放」
+; 路徑: 電腦設定 > 系統管理範本 > Windows元件 > 自動播放原則
+; 原則: 關閉自動播放 (NoDriveTypeAutoRun)
+Computer
+SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+NoDriveTypeAutoRun
+DWORD:255
+
+; [GPO] 啟用「從 [開始] 功能表移除 [最近新增] 清單」
+; 路徑: 電腦設定 > 系統管理範本 > [開始] 功能表和工作列
+; 原則: 從 [開始] 功能表移除 [最近新增] 清單 (HideRecentlyAddedApps)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\Explorer
+HideRecentlyAddedApps
+DWORD:1
+
+; [GPO] 從 [開始] 功能表中移除常用程式清單
+; 路徑: 電腦設定 > 系統管理範本 > [開始] 功能表和工作列
+; 原則: 從 [開始] 功能表中移除常用程式清單 (NoStartMenuMFUprogramsList)
+Computer
+Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+NoStartMenuMFUprogramsList
+DWORD:1
+
+; [GPO] 開啟「不保留最近開啟檔案的紀錄」
+; 路徑: 電腦設定 > 系統管理範本 > [開始] 功能表和工作列
+; 原則: 不保留最近開啟檔案的紀錄 (NoRecentDocsHistory)
+Computer
+Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+NoRecentDocsHistory
+DWORD:1
+
+; [GPO] 啟用「關閉設定」
+; 路徑: 電腦設定 > 系統管理範本 > 系統 > 系統還原
+; 原則: 關閉設定 (DisableConfig)
+Computer
+SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore
+DisableConfig
+DWORD:1
+
+; [GPO] 啟用「關閉系統還原」
+; 路徑: 電腦設定 > 系統管理範本 > 系統 > 系統還原
+; 原則: 關閉系統還原 (DisableSR)
+Computer
+SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore
+DisableSR
+DWORD:1
+
+; [GPO] 啟用「關閉 Microsoft Store 的存取權」
+; 路徑: 電腦設定 > 系統管理範本 > 系統 > 網際網路通訊管理 > 網際網路通訊設定
+; 原則: 關閉 Microsoft Store 的存取權 (NoUseStoreOpenWith)
+Computer
+SOFTWARE\Policies\Microsoft\Windows\Explorer
+NoUseStoreOpenWith
+DWORD:1
+
+; [GPO] 啟用「關閉網際網路檔案關聯服務」
+; 路徑: 電腦設定 > 系統管理範本 > 系統 > 網際網路通訊管理 > 網際網路通訊設定
+; 原則: 關閉網際網路檔案關聯服務 (NoInternetOpenWith)
+Computer
+Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+NoInternetOpenWith
+DWORD:1

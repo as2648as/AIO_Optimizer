@@ -56,6 +56,7 @@ $scripts = @(
     "TaskbarWindowMonitor"                 # 將 「使用多個顯示器時，在以下位置顯示我的工作列應用程式」 設定為 「視窗開啟所在工作列」
     "TurnOffTaskbarCrapRemind"             # 關閉小工具提醒
     "WallpaperRemind"                      # 設定桌布提醒
+    "ApplyLGPO"                            # 套用 LGPO 設定
     "SetUserFolder"                        # 設定使用者資料夾
 )
 

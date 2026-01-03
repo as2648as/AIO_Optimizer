@@ -29,7 +29,7 @@ class RegistryEditor {
                     New-Item -Path $path -Force -ErrorAction Stop | Out-Null
                 }
                 catch {
-                    throw $_
+                    throw
                 }
             }
 
@@ -38,7 +38,7 @@ class RegistryEditor {
                     Set-ItemProperty -Path $path -Name $item.Key -Value $item.Value -Force
                 }
                 catch {
-                    throw $_
+                    throw
                 }
             }
 
@@ -65,6 +65,6 @@ function Get-RegistryValue {
         return $value
     }
     catch {
-        throw $_
+        throw
     }
 }
