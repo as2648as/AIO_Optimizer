@@ -26,7 +26,7 @@ class RegistryEditor {
 
             if (-not (Test-Path $path)) {
                 try {
-                    New-Item -Path $path -Force -ErrorAction Stop | Out-Null
+                    New-Item -Path $path -Force -ErrorAction Stop -ItemType RegistryKey | Out-Null
                 }
                 catch {
                     throw
@@ -48,9 +48,14 @@ class RegistryEditor {
         }
 
         if ($shouldRestartExplorer) {
+            Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "AutoRestartShell" -Value 0 -Force
             Stop-Process -Name explorer -Force
+            Start-Sleep -Seconds 1
             Start-Process explorer
+            Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "AutoRestartShell" -Value 1 -Force
         }
+
+        $this.settings.Clear()
     }
 }
 
