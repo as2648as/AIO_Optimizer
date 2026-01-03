@@ -7,7 +7,7 @@
 
 using module "..\Modules\RegistryTools.psm1"
 
-param([RegistryEditor] $RegisterEditor)
+param([RegistryEditor] $RegistryEditor)
 
 $basePath = Read-Host "請輸入使用者資料夾的基底路徑 (例如：E:\User)"
 

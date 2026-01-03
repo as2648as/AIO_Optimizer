@@ -7,7 +7,7 @@
 
 using module "..\Modules\RegistryTools.psm1"
 
-param([RegistryEditor] $RegisterEditor)
+param([RegistryEditor] $RegistryEditor)
 
 try {
     # 還原舊版右鍵選單

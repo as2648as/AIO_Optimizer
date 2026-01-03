@@ -7,7 +7,7 @@
 
 using module "..\Modules\RegistryTools.psm1"
 
-param([RegistryEditor] $RegisterEditor)
+param([RegistryEditor] $RegistryEditor)
 
 try {
     # 停用「顯示可能不安全檔案的安全性警告」

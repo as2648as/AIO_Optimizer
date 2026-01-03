@@ -86,7 +86,7 @@ for ($i = 0; $i -lt $scripts.Count; $i++) {
 
     Write-Host "[$currentIndex/$scriptCount] $script - " -NoNewline
 
-    $ErrorMessage = & (".\Scripts\$script.ps1") -RegisterEditor $registryEditor
+    $ErrorMessage = & (".\Scripts\$script.ps1") -RegistryEditor $registryEditor
 
     if ($null -eq $ErrorMessage) {
         Write-Host "[OK]" -ForegroundColor Green

@@ -7,7 +7,7 @@
 
 using module "..\Modules\RegistryTools.psm1"
 
-param([RegistryEditor] $RegisterEditor)
+param([RegistryEditor] $RegistryEditor)
 
 try {
     # 關閉「Shift 相黏鍵」
