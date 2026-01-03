@@ -12,7 +12,7 @@ param([RegistryEditor] $RegistryEditor)
 try {
     $RegistryEditor.AddSetting(
         [RegistrySetting]::new(
-            "HKCU:\ms-gamebar",
+            "Registry::HKEY_CLASSES_ROOT\ms-gamebar",
             @{
                 ""             = "URL:ms-gamebar"
                 "URL Protocol" = ""
@@ -24,7 +24,7 @@ try {
 
     $RegistryEditor.AddSetting(
         [RegistrySetting]::new(
-            "HKCU:\ms-gamebar\shell\open\command",
+            "Registry::HKEY_CLASSES_ROOT\ms-gamebar\shell\open\command",
             @{
                 "" = "$env:SystemRoot\System32\systray.exe"
             },
@@ -34,7 +34,7 @@ try {
 
     $RegistryEditor.AddSetting(
         [RegistrySetting]::new(
-            "HKCU:\ms-gamebarservices",
+            "Registry::HKEY_CLASSES_ROOT\ms-gamebarservices",
             @{
                 ""             = "URL:ms-gamebarservices"
                 "URL Protocol" = ""
@@ -46,7 +46,7 @@ try {
 
     $RegistryEditor.AddSetting(
         [RegistrySetting]::new(
-            "HKCU:\ms-gamebarservices\shell\open\command",
+            "Registry::HKEY_CLASSES_ROOT\ms-gamebarservices\shell\open\command",
             @{
                 "" = "$env:SystemRoot\System32\systray.exe"
             },
