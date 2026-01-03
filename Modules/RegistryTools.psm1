@@ -24,28 +24,22 @@ class RegistryEditor {
             $path = $entry.Path
             $items = $entry.Items
 
-            if (-not (Test-Path $path)) {
-                try {
-                    New-Item -Path $path -Force -ErrorAction Stop -ItemType RegistryKey | Out-Null
+            try {
+                if (-not (Test-Path $path)) {
+                    New-Item -Path $path -Force -ItemType RegistryKey | Out-Null
                 }
-                catch {
-                    throw
-                }
-            }
 
-            foreach ($item in $items.GetEnumerator()) {
-                try {
-                    $key = $item.Key
-                    if ($key -eq "") {
-                        Set-Item -Path $path -Value $item.Value -Force -ErrorAction Stop
+                foreach ($item in $items.GetEnumerator()) {
+                    if ($item.Key -eq "") {
+                        Set-Item -Path $path -Value $item.Value -Force
                     }
                     else {
-                        Set-ItemProperty -Path $path -Name $key -Value $item.Value -Force -ErrorAction Stop
+                        Set-ItemProperty -Path $path -Name $item.Key -Value $item.Value -Force
                     }
                 }
-                catch {
-                    throw
-                }
+            }
+            catch {
+                throw
             }
 
             if ($entry.restartExplorer) {
