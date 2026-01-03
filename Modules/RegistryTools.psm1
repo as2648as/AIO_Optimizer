@@ -35,7 +35,7 @@ class RegistryEditor {
 
             foreach ($item in $items.GetEnumerator()) {
                 try {
-                    Set-ItemProperty -Path $path -Name $item.Key -Value $item.Value -Force
+                    Set-ItemProperty -Path "$path" -Name "$item.Key" -Value "$item.Value" -Force
                 }
                 catch {
                     throw

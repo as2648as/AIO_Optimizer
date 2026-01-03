@@ -45,7 +45,7 @@ $scripts = @(
     "EnableNumLockOnLogin"                 # 登入時啟用 NumLock
     "SetZhuInDefaultInputMode"             # 預設中文輸入模式為「英數模式」
 
-    <# 個人化設定 #>
+    # <# 個人化設定 #>
     "DisableUACConsentPromptBehaviorAdmin" # 關閉 UAC 管理員同意提示
     "DisableSecurityNotify"                # 關閉安全性警告通知
     "EnableDarkMode"                       # 啟用深色模式
@@ -54,6 +54,7 @@ $scripts = @(
     "SetStartMenuAtLeft"                   # 將開始功能表設為左側
     "SnapBasicSetting"                     # 停用 [貼齊視窗] 的所有子項目
     "TaskbarWindowMonitor"                 # 將 「使用多個顯示器時，在以下位置顯示我的工作列應用程式」 設定為 「視窗開啟所在工作列」
+    "DisableMSGamebarLinkDialog"           # 停用 [無法開啟此ms-gamebar連結] 對話框
     "TurnOffTaskbarCrapRemind"             # 關閉小工具提醒
     "WallpaperRemind"                      # 設定桌布提醒
     "ApplyLGPO"                            # 套用 LGPO 設定
